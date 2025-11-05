@@ -5,39 +5,22 @@
 SHELL = cmd.exe
 
 # Add inputs and outputs from these tool invocations to the build variables 
-CPP_SRCS += \
-../main.cpp 
-
-CMD_SRCS += \
-../tm4c1294ncpdt.cmd 
-
 C_SRCS += \
-../startup_ccs.c 
+C:/Users/kberk/OneDrive/Documents/School/ECE\ 3849\ -\ Real-Time\ Embedded\ Systems/Labs/Lab\ 2/lab2Workspace/libraries/sysctl_pll.c 
 
 C_DEPS += \
-./startup_ccs.d 
+./libraries/sysctl_pll.d 
 
 OBJS += \
-./main.obj \
-./startup_ccs.obj 
-
-CPP_DEPS += \
-./main.d 
+./libraries/sysctl_pll.obj 
 
 OBJS__QUOTED += \
-"main.obj" \
-"startup_ccs.obj" 
+"libraries\sysctl_pll.obj" 
 
 C_DEPS__QUOTED += \
-"startup_ccs.d" 
-
-CPP_DEPS__QUOTED += \
-"main.d" 
-
-CPP_SRCS__QUOTED += \
-"../main.cpp" 
+"libraries\sysctl_pll.d" 
 
 C_SRCS__QUOTED += \
-"../startup_ccs.c" 
+"C:/Users/kberk/OneDrive/Documents/School/ECE 3849 - Real-Time Embedded Systems/Labs/Lab 2/lab2Workspace/libraries/sysctl_pll.c" 
 
 

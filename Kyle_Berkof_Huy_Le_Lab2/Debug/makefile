@@ -22,6 +22,13 @@ ORDERED_OBJS += \
 "./FreeRTOS/portable/CCS/ARM_CM4F/port.obj" \
 "./FreeRTOS/portable/CCS/ARM_CM4F/portasm.obj" \
 "./FreeRTOS/portable/MemMang/heap_4.obj" \
+"./libraries/OPT3001/OPT3001.obj" \
+"./libraries/buttonsDriver/button.obj" \
+"./libraries/display/Crystalfontz128x128_ST7735.obj" \
+"./libraries/display/HAL_EK_TM4C1294XL_Crystalfontz128x128_ST7735.obj" \
+"./libraries/joystickDriver/joystick.obj" \
+"./libraries/sysctl_pll.obj" \
+"./libraries/timerLib/timerLib.obj" \
 "../tm4c1294ncpdt.cmd" \
 $(GEN_CMDS__FLAG) \
 -llibc.a \
@@ -39,10 +46,22 @@ RMDIR := RMDIR /S/Q
 -include FreeRTOS/subdir_vars.mk
 -include FreeRTOS/portable/CCS/ARM_CM4F/subdir_vars.mk
 -include FreeRTOS/portable/MemMang/subdir_vars.mk
+-include libraries/OPT3001/subdir_vars.mk
+-include libraries/buttonsDriver/subdir_vars.mk
+-include libraries/display/subdir_vars.mk
+-include libraries/joystickDriver/subdir_vars.mk
+-include libraries/subdir_vars.mk
+-include libraries/timerLib/subdir_vars.mk
 -include subdir_rules.mk
 -include FreeRTOS/subdir_rules.mk
 -include FreeRTOS/portable/CCS/ARM_CM4F/subdir_rules.mk
 -include FreeRTOS/portable/MemMang/subdir_rules.mk
+-include libraries/OPT3001/subdir_rules.mk
+-include libraries/buttonsDriver/subdir_rules.mk
+-include libraries/display/subdir_rules.mk
+-include libraries/joystickDriver/subdir_rules.mk
+-include libraries/subdir_rules.mk
+-include libraries/timerLib/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -160,8 +179,9 @@ Kyle_Berkof_Huy_Le_Lab2.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" "startup_ccs.obj" "FreeRTOS\croutine.obj" "FreeRTOS\event_groups.obj" "FreeRTOS\list.obj" "FreeRTOS\queue.obj" "FreeRTOS\stream_buffer.obj" "FreeRTOS\tasks.obj" "FreeRTOS\timers.obj" "FreeRTOS\portable\CCS\ARM_CM4F\port.obj" "FreeRTOS\portable\CCS\ARM_CM4F\portasm.obj" "FreeRTOS\portable\MemMang\heap_4.obj" 
-	-$(RM) "main.d" "startup_ccs.d" "FreeRTOS\croutine.d" "FreeRTOS\event_groups.d" "FreeRTOS\list.d" "FreeRTOS\queue.d" "FreeRTOS\stream_buffer.d" "FreeRTOS\tasks.d" "FreeRTOS\timers.d" "FreeRTOS\portable\CCS\ARM_CM4F\port.d" "FreeRTOS\portable\MemMang\heap_4.d" 
+	-$(RM) "main.obj" "startup_ccs.obj" "FreeRTOS\croutine.obj" "FreeRTOS\event_groups.obj" "FreeRTOS\list.obj" "FreeRTOS\queue.obj" "FreeRTOS\stream_buffer.obj" "FreeRTOS\tasks.obj" "FreeRTOS\timers.obj" "FreeRTOS\portable\CCS\ARM_CM4F\port.obj" "FreeRTOS\portable\CCS\ARM_CM4F\portasm.obj" "FreeRTOS\portable\MemMang\heap_4.obj" "libraries\OPT3001\OPT3001.obj" "libraries\buttonsDriver\button.obj" "libraries\display\Crystalfontz128x128_ST7735.obj" "libraries\display\HAL_EK_TM4C1294XL_Crystalfontz128x128_ST7735.obj" "libraries\joystickDriver\joystick.obj" "libraries\sysctl_pll.obj" "libraries\timerLib\timerLib.obj" 
+	-$(RM) "startup_ccs.d" "FreeRTOS\croutine.d" "FreeRTOS\event_groups.d" "FreeRTOS\list.d" "FreeRTOS\queue.d" "FreeRTOS\stream_buffer.d" "FreeRTOS\tasks.d" "FreeRTOS\timers.d" "FreeRTOS\portable\CCS\ARM_CM4F\port.d" "FreeRTOS\portable\MemMang\heap_4.d" "libraries\OPT3001\OPT3001.d" "libraries\display\Crystalfontz128x128_ST7735.d" "libraries\display\HAL_EK_TM4C1294XL_Crystalfontz128x128_ST7735.d" "libraries\sysctl_pll.d" 
+	-$(RM) "main.d" "libraries\buttonsDriver\button.d" "libraries\joystickDriver\joystick.d" "libraries\timerLib\timerLib.d" 
 	-$(RM) "FreeRTOS\portable\CCS\ARM_CM4F\portasm.d" 
 	-@echo 'Finished clean'
 	-@echo ' '

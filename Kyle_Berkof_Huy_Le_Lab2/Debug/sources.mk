@@ -115,4 +115,10 @@ SUBDIRS := \
 FreeRTOS \
 FreeRTOS/portable/CCS/ARM_CM4F \
 FreeRTOS/portable/MemMang \
+libraries/OPT3001 \
+libraries/buttonsDriver \
+libraries/display \
+libraries/joystickDriver \
+libraries \
+libraries/timerLib \
 
