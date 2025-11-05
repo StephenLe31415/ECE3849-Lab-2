@@ -10,6 +10,9 @@
 #include "task.h"
 //}
 
+#include "button.h"
+static constexpr uint32_t BUTTON_TICK_MS     = 20U;
+
 // LED1: PN0 (D1 Green) - LED2: PN1 (D2 Blue)
 #define LED1_PORT GPIO_PORTN_BASE
 #define LED1_PIN  GPIO_PIN_0
@@ -17,22 +20,39 @@
 #define LED2_PORT GPIO_PORTN_BASE
 #define LED2_PIN  GPIO_PIN_1
 
-void LED1_Task(void *pvParameters) {
-    while (1) {
-        GPIOPinWrite(LED1_PORT, LED1_PIN, LED1_PIN);  // On
-        vTaskDelay(pdMS_TO_TICKS(2000));
-        GPIOPinWrite(LED1_PORT, LED1_PIN, 0);         // Off
-        vTaskDelay(pdMS_TO_TICKS(2000));
-    }
+/****** BUTTON ******/
+void OnPlayPauseClick() {
+    // Do something with the buzzer
+    // gRunning = !gRunning;
+
 }
 
-void LED2_Task(void *pvParameters) {
-    while (1) {
-        GPIOPinWrite(LED2_PORT, LED2_PIN, LED2_PIN);  // On
-        vTaskDelay(pdMS_TO_TICKS(200));
-        GPIOPinWrite(LED2_PORT, LED2_PIN, 0);         // Off
-        vTaskDelay(pdMS_TO_TICKS(200));
-    }
+void OnResetClick() {
+    // Do something with the buzzer
+    // global_timer = 0;
+}
+
+void buttonTask(void *pvParameters) {
+    // Button Init
+    Button btnPlayPause(S1);
+    Button btnReset(S2);
+    
+    btnPlayPause.begin(); 
+    btnPlayPause.setDebounceMs(30U);
+//    btnPlayPause.setTickInterval(20U);
+    
+    btnReset.begin();
+    btnReset.setDebounceMs(30U);
+//    btnReset.setTickInterval(20U);
+
+    btnPlayPause.attachClick(&OnPlayPauseClick);
+    btnReset.attachClick(&OnResetClick);
+
+    while(1) {
+        btnPlayPause.tick();
+        btnReset.tick();
+        vTaskDelay(pdMS_TO_TICKS(BUTTON_TICK_MS));              // Wait 16ms
+    }    
 }
 
 int main(void) {
@@ -64,8 +84,7 @@ int main(void) {
     IntMasterEnable();
 
     // Create tasks
-    xTaskCreate(LED1_Task, "LED1", 128, NULL, 1, NULL);
-    xTaskCreate(LED2_Task, "LED2", 128, NULL, 1, NULL);
+    xTaskCreate(buttonTask, "Button", 512, NULL, tskIDLE_PRIORITY + 1, NULL);
 
     // Start scheduler
     vTaskStartScheduler();
